@@ -8,7 +8,7 @@
 <style>
 /* ===============================
 COLOR THEME
-=============================== */
+============================== */
 :root{
 --amber:#ffb020;
 --darkblue:#0f2a44;
@@ -21,9 +21,10 @@ COLOR THEME
 --card:#1b1f27;
 --text:#f1f1f1;
 }
+
 /* ===============================
 GLOBAL
-=============================== */
+============================== */
 *{box-sizing:border-box;}
 body{
 margin:0;
@@ -34,9 +35,10 @@ line-height:1.6;
 transition:0.3s;
 }
 html{scroll-behavior:smooth;}
+
 /* ===============================
 NAVBAR
-=============================== */
+============================== */
 nav{
 display:flex;
 justify-content:space-between;
@@ -91,7 +93,7 @@ border-radius:6px;
 
 /* ===============================
 HERO
-=============================== */
+============================== */
 .hero{
 position:relative;
 padding:120px 20px 80px;
@@ -104,7 +106,6 @@ align-items:center;
 justify-content:center;
 overflow:hidden;
 }
-
 /* PARTICLES */
 .hero::before{
 content:"";
@@ -126,7 +127,7 @@ z-index:0;
 
 /* ===============================
 LOGO
-=============================== */
+============================== */
 .logo-stack{
 position:relative;
 width:190px;
@@ -193,7 +194,7 @@ filter:blur(7px);
 
 /* ===============================
 FEATURES
-=============================== */
+============================== */
 .features{padding:90px 10%; text-align:center;}
 .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:30px; margin-top:40px; margin-bottom:80px;}
 .card{background:var(--card); padding:35px; border-radius:16px; box-shadow:0 10px 25px rgba(0,0,0,0.08); transition:0.35s; cursor:pointer;}
@@ -204,36 +205,42 @@ FEATURES
 
 /* ===============================
 RESEARCH
-=============================== */
+============================== */
 .research{max-width:900px;margin:auto;background:var(--card);padding:40px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,0.08);}
 
 /* ===============================
 FOOTER
-=============================== */
+============================== */
 footer{background:var(--darkblue); color:white; text-align:center; padding:25px; margin-top:60px;}
 
 /* ===============================
 RESPONSIVE
-=============================== */
+============================== */
 @media(max-width:768px){
 .hero h1{font-size:44px;}
 .logo-stack{width:140px;height:140px;margin-bottom:20px;}
 }
 @media(max-width:480px){
 nav{
-justify-content:space-between;
-align-items:center;
+justify-content:flex-start;
+align-items:flex-start;
 padding:12px 5%;
 gap:12px;
 }
 .nav-left-links{
 flex-direction:column;
-gap:8px;
-align-items:flex-start;
-max-width:140px;
+align-items:flex-end; /* stack on right */
+gap:6px;
+margin-right:8px; /* space from toggle */
 }
-.nav-right{flex-grow:0; margin-left:12px;}
-.dark-btn{font-size:28px; padding:8px 14px;}
+.nav-right{
+margin-left:4px;
+flex-shrink:0;
+}
+.dark-btn{
+font-size:28px;
+padding:8px 14px;
+}
 .hero h1{font-size:32px;}
 .logo-stack{width:110px;height:110px;margin-bottom:15px;}
 .download{padding:12px 24px;font-size:16px;}
