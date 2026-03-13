@@ -59,7 +59,7 @@ nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:18px 8%;
+padding:12px 8%;
 background:var(--darkblue);
 color:white;
 position:sticky;
@@ -68,8 +68,35 @@ z-index:100;
 }
 
 .logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo-stack{
+position: relative;
+width: 60px; /* adjust overall logo size */
+height: 60px;
+}
+
+.logo-stack img{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: contain;
+transition: transform 0.3s;
+}
+
+.logo-stack:hover img.logo-main{
+transform: scale(1.1);
+}
+
+.logo span{
 font-size:22px;
 font-weight:700;
+color:white;
 }
 
 nav a{
@@ -231,6 +258,44 @@ opacity:1;
 transform:translateY(0);
 }
 
+/* ===============================
+RESPONSIVE
+=============================== */
+
+@media(max-width:768px){
+.logo-stack{
+width:50px;
+height:50px;
+}
+.hero h1{
+font-size:42px;
+}
+.hero p{
+font-size:16px;
+}
+.download{
+padding:14px 28px;
+font-size:16px;
+}
+}
+
+@media(max-width:480px){
+.logo-stack{
+width:40px;
+height:40px;
+}
+.hero h1{
+font-size:32px;
+}
+.hero p{
+font-size:14px;
+}
+.download{
+padding:12px 24px;
+font-size:14px;
+}
+}
+
 </style>
 
 </head>
@@ -240,7 +305,11 @@ transform:translateY(0);
 <nav>
 
 <div class="logo">
-<i class="fa-solid fa-eye"></i> EyeSpeak
+  <div class="logo-stack">
+    <img src="ic_background.png" alt="EyeSpeak Background" class="logo-bg">
+    <img src="ic_foreground.png" alt="EyeSpeak Main Design" class="logo-main">
+  </div>
+  <span>EyeSpeak</span>
 </div>
 
 <div>
@@ -265,7 +334,7 @@ read printed text by scanning documents through the camera and converting the
 recognized text into spoken audio.
 </p>
 
-<a class="download" href="EyeSpeak.apk" download>
+<a class="download" href="eyespeak.apk" download>
 <i class="fa-solid fa-download"></i> Download APK
 </a>
 
@@ -337,7 +406,7 @@ pupils access printed educational materials more independently.
 
 <footer>
 
-EyeSpeak Accessibility Project © 2026
+EyeSpeak Website © 2026
 
 </footer>
 
