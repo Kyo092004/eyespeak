@@ -1,561 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 <title>EyeSpeak | OCR Reading App</title>
-
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-/>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <style>
-  /* ===============================
-  COLOR THEME
-  =============================== */
+/* ===============================
+COLOR THEME
+=============================== */
+:root{
+--amber:#ffb020;
+--darkblue:#0f2a44;
+--offwhite:#f6f6f4;
+--card:#ffffff;
+--text:#222;
+}
+.dark{
+--offwhite:#0e1116;
+--card:#1b1f27;
+--text:#f1f1f1;
+}
+/* ===============================
+GLOBAL
+=============================== */
+*{box-sizing:border-box;}
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+background:var(--offwhite);
+color:var(--text);
+line-height:1.6;
+transition:0.3s;
+}
+html{scroll-behavior:smooth;}
+/* ===============================
+NAVBAR
+=============================== */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px 6%;
+background:var(--darkblue);
+color:white;
+position:sticky;
+top:0;
+z-index:100;
+flex-wrap:wrap;
+gap:8px;
+}
+.nav-left{
+font-weight:700;
+font-size:26px;
+display:flex;
+align-items:center;
+gap:10px;
+cursor:pointer;
+}
+.nav-left i{font-size:28px;}
+.nav-left-links{
+display:flex;
+flex-direction:row;
+gap:28px;
+align-items:center;
+}
+.nav-right{
+display:flex;
+align-items:center;
+gap:28px;
+}
+nav a{
+color:white;
+text-decoration:none;
+font-size:16px;
+white-space:nowrap;
+}
+.dark-btn{
+background:none;
+border:none;
+color:white;
+font-size:20px;
+cursor:pointer;
+padding:6px 10px;
+line-height:1;
+transition:0.3s;
+border-radius:6px;
+}
+.dark-btn:hover{background: rgba(255,176,32,0.15);}
 
-  :root {
-    --amber: #ffb020;
-    --darkblue: #0f2a44;
-    --offwhite: #f6f6f4;
-    --card: #ffffff;
-    --text: #222;
-  }
+/* ===============================
+HERO
+=============================== */
+.hero{
+position:relative;
+padding:120px 20px 80px;
+text-align:center;
+background:linear-gradient(135deg,var(--darkblue),#163d63);
+color:white;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
 
-  .dark {
-    --offwhite: #0e1116;
-    --card: #1b1f27;
-    --text: #f1f1f1;
-  }
+/* PARTICLES */
+.hero::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+top:-50%;
+left:-50%;
+background:radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 3px),
+radial-gradient(circle, rgba(255,255,255,0.12) 1.5px, transparent 3px);
+background-size:120px 120px, 180px 180px;
+animation:particlesMove 60s linear infinite;
+z-index:0;
+}
+@keyframes particlesMove{
+0%{transform:translate(0,0);}
+100%{transform:translate(200px,300px);}
+}
 
-  /* ===============================
-  GLOBAL
-  =============================== */
+/* ===============================
+LOGO
+=============================== */
+.logo-stack{
+position:relative;
+width:190px;
+height:190px;
+margin:0 auto 25px auto;
+display:flex;
+align-items:center;
+justify-content:center;
+perspective:800px;
+}
+.logo-float{
+position:relative;
+width:150px;
+height:150px;
+animation:floatLogo 5s ease-in-out infinite;
+transform-style: preserve-3d;
+transition: transform 0.15s ease;
+margin:0 auto;
+}
+.logo-bg,.logo-main{
+position:absolute;
+top:50%;
+left:50%;
+width:150px;
+height:150px;
+border-radius:50%;
+transform:translate(-50%,-50%);
+filter:drop-shadow(0 0 15px var(--amber));
+transition:filter 0.3s, transform 0.3s;
+object-fit:contain;
+pointer-events:none;
+}
+.logo-main{
+filter:drop-shadow(0 0 25px var(--amber));
+z-index:10;
+}
+.logo-stack:hover .logo-main{
+transform:translate(-50%,-50%) scale(1.18);
+filter:drop-shadow(0 0 40px var(--amber));
+}
+/* shadow */
+.logo-stack::after{
+content:"";
+position:absolute;
+bottom:-18px;
+left:50%;
+transform:translateX(-50%);
+width:75%;
+height:14px;
+background:radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 80%);
+border-radius:50%;
+filter:blur(7px);
+}
+/* floating animation */
+@keyframes floatLogo{
+0%{transform:translateY(0);}
+50%{transform:translateY(-12px);}
+100%{transform:translateY(0);}
+}
+.hero h1{font-size:64px;margin:15px 0 10px 0;z-index:2;}
+.hero p{max-width:700px;font-size:19px;opacity:0.9;z-index:2;margin:0 auto;}
+.download{display:inline-block;margin-top:35px;padding:16px 38px;background:var(--amber);color:black;text-decoration:none;font-weight:600;border-radius:30px;font-size:18px;transition:0.25s;z-index:2;}
+.download:hover{transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,0.25);}
 
-  * {
-    box-sizing: border-box;
-  }
+/* ===============================
+FEATURES
+=============================== */
+.features{padding:90px 10%; text-align:center;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:30px; margin-top:40px; margin-bottom:80px;}
+.card{background:var(--card); padding:35px; border-radius:16px; box-shadow:0 10px 25px rgba(0,0,0,0.08); transition:0.35s; cursor:pointer;}
+.card:hover{transform:translateY(-10px) scale(1.03); box-shadow:0 18px 40px rgba(0,0,0,0.18);}
+.card i{font-size:34px; color:var(--darkblue); margin-bottom:10px; transition:0.3s;}
+.card:hover i{transform:scale(1.2);}
+.dark .card i{color:var(--amber); text-shadow:0 0 8px rgba(255,176,32,0.6);}
 
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Arial, sans-serif;
-    background: var(--offwhite);
-    color: var(--text);
-    line-height: 1.6;
-    transition: 0.3s;
-  }
+/* ===============================
+RESEARCH
+=============================== */
+.research{max-width:900px;margin:auto;background:var(--card);padding:40px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,0.08);}
 
-  html {
-    scroll-behavior: smooth;
-  }
+/* ===============================
+FOOTER
+=============================== */
+footer{background:var(--darkblue); color:white; text-align:center; padding:25px; margin-top:60px;}
 
-  /* ===============================
-  NAVBAR
-  =============================== */
-
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 6%;
-    background: var(--darkblue);
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .nav-left {
-    font-weight: 700;
-    font-size: 26px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-
-  .nav-left i {
-    font-size: 28px;
-  }
-
-  /* Wrap links */
-  .nav-left-links {
-    display: flex;
-    flex-direction: row;
-    gap: 28px;
-    align-items: center;
-  }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    flex-wrap: nowrap;
-  }
-
-  nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    white-space: nowrap;
-  }
-
-  .dark-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 6px 10px;
-    line-height: 1;
-    transition: 0.3s;
-    border-radius: 6px;
-  }
-
-  .dark-btn:hover {
-    background: rgba(255, 176, 32, 0.15);
-  }
-
-  /* ===============================
-  HERO & CONTAINER
-  =============================== */
-
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .hero {
-    position: relative;
-    padding: 120px 20px 80px;
-    text-align: center;
-    background: linear-gradient(135deg, var(--darkblue), #163d63);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  /* PARTICLES */
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.15) 2px,
-        transparent 3px
-      ),
-      radial-gradient(circle, rgba(255, 255, 255, 0.12) 1.5px, transparent 3px);
-    background-size: 120px 120px, 180px 180px;
-    animation: particlesMove 60s linear infinite;
-    z-index: 0;
-  }
-
-  @keyframes particlesMove {
-    0% {
-      transform: translate(0, 0);
-    }
-    100% {
-      transform: translate(200px, 300px);
-    }
-  }
-
-  /* ===============================
-  LOGO
-  =============================== */
-
-  .logo-stack {
-    position: relative;
-    width: 190px;
-    height: 190px;
-    margin: 0 auto 25px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 800px;
-  }
-
-  .logo-float {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    animation: floatLogo 5s ease-in-out infinite;
-    transform-style: preserve-3d;
-    transition: transform 0.15s ease;
-    margin: 0 auto;
-  }
-
-  .logo-bg,
-  .logo-main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    filter: drop-shadow(0 0 15px var(--amber));
-    transition: filter 0.3s, transform 0.3s;
-    object-fit: contain;
-    pointer-events: none;
-  }
-
-  .logo-main {
-    filter: drop-shadow(0 0 25px var(--amber));
-    z-index: 10;
-  }
-
-  .logo-stack:hover .logo-main {
-    transform: translate(-50%, -50%) scale(1.18);
-    filter: drop-shadow(0 0 40px var(--amber));
-  }
-
-  /* shadow */
-
-  .logo-stack::after {
-    content: "";
-    position: absolute;
-    bottom: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 75%;
-    height: 14px;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0.35) 0%,
-      rgba(0, 0, 0, 0) 80%
-    );
-    border-radius: 50%;
-    filter: blur(7px);
-  }
-
-  /* floating animation */
-
-  @keyframes floatLogo {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-12px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-
-  /* HERO TEXT */
-
-  .hero h1 {
-    font-size: 64px;
-    margin: 15px 0 10px 0;
-    z-index: 2;
-  }
-
-  .hero p {
-    max-width: 700px;
-    font-size: 19px;
-    opacity: 0.9;
-    z-index: 2;
-    margin: 0 auto;
-  }
-
-  /* ===============================
-  BUTTON
-  =============================== */
-
-  .download {
-    display: inline-block;
-    margin-top: 35px;
-    padding: 16px 38px;
-    background: var(--amber);
-    color: black;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 30px;
-    font-size: 18px;
-    transition: 0.25s;
-    z-index: 2;
-  }
-
-  .download:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  }
-
-  /* ===============================
-  FEATURES
-  =============================== */
-
-  .features {
-    padding: 90px 10%;
-    text-align: center;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-    margin-bottom: 80px;
-  }
-
-  .card {
-    background: var(--card);
-    padding: 35px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: 0.35s;
-    cursor: pointer;
-  }
-
-  .card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-  }
-
-  .card i {
-    font-size: 34px;
-    color: var(--darkblue);
-    margin-bottom: 10px;
-    transition: 0.3s;
-  }
-
-  .card:hover i {
-    transform: scale(1.2);
-  }
-
-  .dark .card i {
-    color: var(--amber);
-    text-shadow: 0 0 8px rgba(255, 176, 32, 0.6);
-  }
-
-  /* ===============================
-  RESEARCH
-  =============================== */
-
-  .research {
-    max-width: 900px;
-    margin: auto;
-    background: var(--card);
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  }
-
-  /* ===============================
-  FOOTER
-  =============================== */
-
-  footer {
-    background: var(--darkblue);
-    color: white;
-    text-align: center;
-    padding: 25px;
-    margin-top: 60px;
-  }
-
-  /* ===============================
-  RESPONSIVE
-  =============================== */
-
-  @media (max-width: 768px) {
-    nav {
-      padding: 16px 4%;
-      gap: 12px;
-    }
-    .nav-right {
-      gap: 14px;
-    }
-    .hero h1 {
-      font-size: 44px;
-    }
-    .logo-stack {
-      width: 140px;
-      height: 140px;
-      margin-bottom: 20px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    nav {
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 5%;
-      gap: 0;
-    }
-
-    .nav-left-links {
-      flex-direction: column;
-      gap: 8px;
-      align-items: flex-start;
-      margin-right: auto;
-    }
-
-    .nav-left-links,
-    .nav-left-links a {
-      display: flex;
-    }
-
-    .nav-left-links a {
-      color: white;
-      font-size: 16px;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-
-    .nav-right {
-      flex-grow: 0;
-    }
-
-    /* Bigger dark mode button on mobile */
-    .dark-btn {
-      font-size: 28px;
-      padding: 8px 14px;
-    }
-
-    .hero h1 {
-      font-size: 32px;
-    }
-    .logo-stack {
-      width: 110px;
-      height: 110px;
-      margin-bottom: 15px;
-    }
-    .download {
-      padding: 12px 24px;
-      font-size: 16px;
-    }
-  }
+/* ===============================
+RESPONSIVE
+=============================== */
+@media(max-width:768px){
+.hero h1{font-size:44px;}
+.logo-stack{width:140px;height:140px;margin-bottom:20px;}
+}
+@media(max-width:480px){
+nav{
+justify-content:space-between;
+align-items:center;
+padding:12px 5%;
+gap:12px;
+}
+.nav-left-links{
+flex-direction:column;
+gap:8px;
+align-items:flex-start;
+max-width:140px;
+}
+.nav-right{flex-grow:0; margin-left:12px;}
+.dark-btn{font-size:28px; padding:8px 14px;}
+.hero h1{font-size:32px;}
+.logo-stack{width:110px;height:110px;margin-bottom:15px;}
+.download{padding:12px 24px;font-size:16px;}
+}
 </style>
 </head>
-
 <body>
-  <nav>
-    <div class="nav-left" onclick="scrollToTop()">
-      <i class="fa-solid fa-eye"></i> EyeSpeak
-    </div>
 
-    <div class="nav-left-links">
-      <a href="#features">Features</a>
-      <a href="#research">Research</a>
-    </div>
+<nav>
+<div class="nav-left" onclick="scrollToTop()"><i class="fa-solid fa-eye"></i> EyeSpeak</div>
+<div class="nav-left-links">
+<a href="#features">Features</a>
+<a href="#research">Research</a>
+</div>
+<div class="nav-right">
+<button class="dark-btn" onclick="toggleDark()" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+</div>
+</nav>
 
-    <div class="nav-right">
-      <button class="dark-btn" onclick="toggleDark()" aria-label="Toggle dark mode">
-        <i class="fa-solid fa-moon"></i>
-      </button>
-    </div>
-  </nav>
+<section class="hero">
+<div class="logo-stack">
+<div class="logo-float" id="logo3d">
+<img src="ic_background.png" class="logo-bg" alt="EyeSpeak Background Logo">
+<img src="ic_foreground.png" class="logo-main" alt="EyeSpeak Main Logo">
+</div>
+</div>
+<h1>EyeSpeak</h1>
+<p>EyeSpeak is a mobile assistive application designed to help visually impaired pupils read printed text by scanning documents and converting recognized text into spoken audio.</p>
+<a class="download" href="eyespeak.apk" download><i class="fa-solid fa-download"></i> Download APK</a>
+</section>
 
-  <section class="hero">
-    <div class="container">
-      <div class="logo-stack">
-        <div class="logo-float" id="logo3d">
-          <img src="ic_background.png" alt="EyeSpeak Background Logo" class="logo-bg" />
-          <img src="ic_foreground.png" alt="EyeSpeak Main Logo" class="logo-main" />
-        </div>
-      </div>
+<section id="features" class="features">
+<h2>Key Features</h2>
+<div class="grid">
+<div class="card"><i class="fa-solid fa-camera"></i><h3>OCR Camera</h3><p>Scan printed materials using the smartphone camera.</p></div>
+<div class="card"><i class="fa-solid fa-volume-high"></i><h3>Text to Speech</h3><p>Detected text is converted into spoken audio.</p></div>
+<div class="card"><i class="fa-solid fa-brain"></i><h3>Machine Learning</h3><p>Advanced OCR powered by machine learning.</p></div>
+<div class="card"><i class="fa-solid fa-universal-access"></i><h3>Accessibility</h3><p>Designed for visually impaired pupils.</p></div>
+</div>
+<div id="research" class="research">
+<h2>Research & Thesis Description</h2>
+<p>EyeSpeak is an assistive mobile application developed to improve access to printed learning materials for visually impaired students. The application uses Google ML Kit for OCR and Android Text-to-Speech to read content aloud.</p>
+</div>
+</section>
 
-      <h1>EyeSpeak</h1>
+<footer>EyeSpeak Website © 2026</footer>
 
-      <p>
-        EyeSpeak is a mobile assistive application designed to help visually impaired pupils
-        read printed text by scanning documents and converting recognized text into spoken
-        audio.
-      </p>
+<script>
+function toggleDark(){document.body.classList.toggle("dark");}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+const logo=document.getElementById("logo3d");
+document.addEventListener("mousemove",(e)=>{
+if(window.innerWidth<768){logo.style.transform="";return;}
+const x=(window.innerWidth/2-e.pageX)/40;
+const y=(window.innerHeight/2-e.pageY)/40;
+logo.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`;
+});
+</script>
 
-      <a class="download" href="eyespeak.apk" download>
-        <i class="fa-solid fa-download"></i> Download APK
-      </a>
-    </div>
-  </section>
-
-  <section id="features" class="features">
-    <h2>Key Features</h2>
-
-    <div class="grid">
-      <div class="card">
-        <i class="fa-solid fa-camera"></i>
-        <h3>OCR Camera</h3>
-        <p>Scan printed materials using the smartphone camera.</p>
-      </div>
-
-      <div class="card">
-        <i class="fa-solid fa-volume-high"></i>
-        <h3>Text to Speech</h3>
-        <p>Detected text is converted into spoken audio.</p>
-      </div>
-
-      <div class="card">
-        <i class="fa-solid fa-brain"></i>
-        <h3>Machine Learning</h3>
-        <p>Advanced OCR powered by machine learning.</p>
-      </div>
-
-      <div class="card">
-        <i class="fa-solid fa-universal-access"></i>
-        <h3>Accessibility</h3>
-        <p>Designed for visually impaired pupils.</p>
-      </div>
-    </div>
-
-    <div id="research" class="research">
-      <h2>Research & Thesis Description</h2>
-
-      <p>
-        EyeSpeak is an assistive mobile application developed to improve access to printed
-        learning materials for visually impaired students.
-
-        The application uses Google ML Kit for optical character recognition to detect printed
-        text from books, worksheets, and documents through the smartphone camera.
-
-        After text detection, Android Text-to-Speech converts the recognized text into spoken
-        audio so users can listen to the content instead of reading visually.
-      </p>
-    </div>
-  </section>
-
-  <footer>EyeSpeak Website © 2026</footer>
-
-  <script>
-    /* DARK MODE */
-    function toggleDark() {
-      document.body.classList.toggle("dark");
-    }
-
-    /* SCROLL TO TOP */
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    /* 3D LOGO EFFECT */
-    const logo = document.getElementById("logo3d");
-
-    document.addEventListener("mousemove", (e) => {
-      // Only apply on wider screens
-      if (window.innerWidth < 768) {
-        logo.style.transform = "";
-        return;
-      }
-      const x = (window.innerWidth / 2 - e.pageX) / 40;
-      const y = (window.innerHeight / 2 - e.pageY) / 40;
-
-      logo.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-    });
-  </script>
 </body>
 </html>
