@@ -84,6 +84,14 @@
     font-size: 28px;
   }
 
+  /* Wrap links */
+  .nav-left-links {
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+    align-items: center;
+  }
+
   .nav-right {
     display: flex;
     align-items: center;
@@ -106,6 +114,12 @@
     cursor: pointer;
     padding: 6px 10px;
     line-height: 1;
+    transition: 0.3s;
+    border-radius: 6px;
+  }
+
+  .dark-btn:hover {
+    background: rgba(255, 176, 32, 0.15);
   }
 
   /* ===============================
@@ -378,17 +392,41 @@
 
   @media (max-width: 480px) {
     nav {
-      padding: 12px 3%;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 5%;
+      gap: 0;
+    }
+
+    .nav-left-links {
+      flex-direction: column;
       gap: 8px;
+      align-items: flex-start;
+      margin-right: auto;
     }
+
+    .nav-left-links,
+    .nav-left-links a {
+      display: flex;
+    }
+
+    .nav-left-links a {
+      color: white;
+      font-size: 16px;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
     .nav-right {
-      gap: 12px;
-      flex-wrap: nowrap;
+      flex-grow: 0;
     }
+
+    /* Bigger dark mode button on mobile */
     .dark-btn {
-      font-size: 18px;
-      padding: 6px 8px;
+      font-size: 28px;
+      padding: 8px 14px;
     }
+
     .hero h1 {
       font-size: 32px;
     }
@@ -411,10 +449,12 @@
       <i class="fa-solid fa-eye"></i> EyeSpeak
     </div>
 
-    <div class="nav-right">
+    <div class="nav-left-links">
       <a href="#features">Features</a>
       <a href="#research">Research</a>
+    </div>
 
+    <div class="nav-right">
       <button class="dark-btn" onclick="toggleDark()" aria-label="Toggle dark mode">
         <i class="fa-solid fa-moon"></i>
       </button>
