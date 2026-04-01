@@ -1,303 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>EyeSpeak | OCR Reading App</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<style>
-/* ===============================
-COLOR THEME
-============================== */
-:root{
---amber:#ffb020;
---darkblue:#0f2a44;
---offwhite:#f6f6f4;
---card:#ffffff;
---text:#222;
-}
-.dark{
---offwhite:#0e1116;
---card:#1b1f27;
---text:#f1f1f1;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EyeSpeak | OCR Reading App</title>
 
-/* ===============================
-GLOBAL
-============================== */
-*{box-sizing:border-box;}
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-background:var(--offwhite);
-color:var(--text);
-line-height:1.6;
-transition:0.3s;
-}
-html{scroll-behavior:smooth;}
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-/* ===============================
-NAVBAR
-============================== */
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:16px 6%;
-background:var(--darkblue);
-color:white;
-position:sticky;
-top:0;
-z-index:100;
-flex-wrap:wrap;
-gap:8px;
-}
-.nav-left{
-font-weight:700;
-font-size:26px;
-display:flex;
-align-items:center;
-gap:10px;
-cursor:pointer;
-}
-.nav-left i{font-size:28px;}
-.nav-left-links{
-display:flex;
-flex-direction:row;
-gap:28px;
-align-items:center;
-}
-.nav-right{
-display:flex;
-align-items:center;
-gap:28px;
-}
-nav a{
-color:white;
-text-decoration:none;
-font-size:16px;
-white-space:nowrap;
-}
-.dark-btn{
-background:none;
-border:none;
-color:white;
-font-size:20px;
-cursor:pointer;
-padding:6px 10px;
-line-height:1;
-transition:0.3s;
-border-radius:6px;
-}
-.dark-btn:hover{background: rgba(255,176,32,0.15);}
+  <style>
+    :root{
+      --amber:#ffb020;
+      --darkblue:#0f2a44;
+    }
 
-/* ===============================
-HERO
-============================== */
-.hero{
-position:relative;
-padding:120px 20px 80px;
-text-align:center;
-background:linear-gradient(135deg,var(--darkblue),#163d63);
-color:white;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-}
-/* PARTICLES */
-.hero::before{
-content:"";
-position:absolute;
-width:200%;
-height:200%;
-top:-50%;
-left:-50%;
-background:radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 3px),
-radial-gradient(circle, rgba(255,255,255,0.12) 1.5px, transparent 3px);
-background-size:120px 120px, 180px 180px;
-animation:particlesMove 60s linear infinite;
-z-index:0;
-}
-@keyframes particlesMove{
-0%{transform:translate(0,0);}
-100%{transform:translate(200px,300px);}
-}
+    body{
+      font-family: "Bookman Old Style", serif;
+      transition: background 0.3s, color 0.3s;
+    }
 
-/* ===============================
-LOGO
-============================== */
-.logo-stack{
-position:relative;
-width:190px;
-height:190px;
-margin:0 auto 25px auto;
-display:flex;
-align-items:center;
-justify-content:center;
-perspective:800px;
-}
-.logo-float{
-position:relative;
-width:150px;
-height:150px;
-animation:floatLogo 5s ease-in-out infinite;
-transform-style: preserve-3d;
-transition: transform 0.15s ease;
-margin:0 auto;
-}
-.logo-bg,.logo-main{
-position:absolute;
-top:50%;
-left:50%;
-width:150px;
-height:150px;
-border-radius:50%;
-transform:translate(-50%,-50%);
-filter:drop-shadow(0 0 15px var(--amber));
-transition:filter 0.3s, transform 0.3s;
-object-fit:contain;
-pointer-events:none;
-}
-.logo-main{
-filter:drop-shadow(0 0 25px var(--amber));
-z-index:10;
-}
-.logo-stack:hover .logo-main{
-transform:translate(-50%,-50%) scale(1.18);
-filter:drop-shadow(0 0 40px var(--amber));
-}
-/* shadow */
-.logo-stack::after{
-content:"";
-position:absolute;
-bottom:-18px;
-left:50%;
-transform:translateX(-50%);
-width:75%;
-height:14px;
-background:radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 80%);
-border-radius:50%;
-filter:blur(7px);
-}
-/* floating animation */
-@keyframes floatLogo{
-0%{transform:translateY(0);}
-50%{transform:translateY(-12px);}
-100%{transform:translateY(0);}
-}
-.hero h1{font-size:64px;margin:15px 0 10px 0;z-index:2;}
-.hero p{max-width:700px;font-size:19px;opacity:0.9;z-index:2;margin:0 auto;}
-.download{display:inline-block;margin-top:35px;padding:16px 38px;background:var(--amber);color:black;text-decoration:none;font-weight:600;border-radius:30px;font-size:18px;transition:0.25s;z-index:2;}
-.download:hover{transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,0.25);}
+    /* PREMIUM NAVBAR */
+    .navbar{
+      background: rgba(15,42,68,0.85);
+      backdrop-filter: blur(10px);
+      padding: 14px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
 
-/* ===============================
-FEATURES
-============================== */
-.features{padding:90px 10%; text-align:center;}
-.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:30px; margin-top:40px; margin-bottom:80px;}
-.card{background:var(--card); padding:35px; border-radius:16px; box-shadow:0 10px 25px rgba(0,0,0,0.08); transition:0.35s; cursor:pointer;}
-.card:hover{transform:translateY(-10px) scale(1.03); box-shadow:0 18px 40px rgba(0,0,0,0.18);}
-.card i{font-size:34px; color:var(--darkblue); margin-bottom:10px; transition:0.3s;}
-.card:hover i{transform:scale(1.2);}
-.dark .card i{color:var(--amber); text-shadow:0 0 8px rgba(255,176,32,0.6);}
+    .navbar-brand{
+      font-weight: 700;
+      font-size: 22px;
+    }
 
-/* ===============================
-RESEARCH
-============================== */
-.research{max-width:900px;margin:auto;background:var(--card);padding:40px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,0.08);}
+    .nav-link{
+      position: relative;
+      font-weight: 500;
+    }
 
-/* ===============================
-FOOTER
-============================== */
-footer{background:var(--darkblue); color:white; text-align:center; padding:25px; margin-top:60px;}
+    .nav-link::after{
+      content:"";
+      position:absolute;
+      width:0%;
+      height:2px;
+      left:0;
+      bottom:0;
+      background: var(--amber);
+      transition:0.3s;
+    }
 
-/* ===============================
-RESPONSIVE
-============================== */
-@media(max-width:768px){
-.hero h1{font-size:44px;}
-.logo-stack{width:140px;height:140px;margin-bottom:20px;}
-}
-@media(max-width:480px){
-nav{
-justify-content:flex-start;
-align-items:flex-start;
-padding:12px 5%;
-gap:12px;
-}
-.nav-left-links{
-flex-direction:column;
-align-items:flex-end; /* stack on right */
-gap:6px;
-margin-right:8px; /* space from toggle */
-}
-.nav-right{
-margin-left:4px;
-flex-shrink:0;
-}
-.dark-btn{
-font-size:28px;
-padding:8px 14px;
-}
-.hero h1{font-size:32px;}
-.logo-stack{width:110px;height:110px;margin-bottom:15px;}
-.download{padding:12px 24px;font-size:16px;}
-}
-</style>
+    .nav-link:hover::after{
+      width:100%;
+    }
+
+    /* HERO */
+    .hero{
+      background: linear-gradient(135deg, var(--darkblue), #163d63);
+      color: white;
+      padding: 120px 0;
+      text-align: center;
+    }
+
+    .hero img{
+      width: 120px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 20px rgba(255,176,32,0.5));
+    }
+
+    .btn-main{
+      background: var(--amber);
+      border: none;
+      font-weight: 600;
+      border-radius: 30px;
+      padding: 12px 28px;
+    }
+
+    .btn-main:hover{
+      background: #e89c1c;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    /* FEATURES */
+    .feature-card{
+      border: none;
+      border-radius: 18px;
+      transition: 0.35s;
+      background: rgba(255,255,255,0.9);
+    }
+
+    [data-bs-theme="dark"] .feature-card{
+      background: rgba(30,34,45,0.9);
+    }
+
+    .feature-card:hover{
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .icon{
+      font-size: 32px;
+      color: var(--darkblue);
+      margin-bottom: 10px;
+    }
+
+    [data-bs-theme="dark"] .icon{
+      color: var(--amber) !important;
+    }
+
+    .section-title{
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    /* RESEARCH CARD */
+    .research-card{
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.95);
+    }
+
+    [data-bs-theme="dark"] .research-card{
+      background: rgba(30,34,45,0.95);
+    }
+
+    /* FOOTER */
+    footer{
+      background: var(--darkblue);
+      color: white;
+      padding: 25px;
+      text-align: center;
+      margin-top:60px;
+    }
+  </style>
 </head>
+
 <body>
 
-<nav>
-<div class="nav-left" onclick="scrollToTop()"><i class="fa-solid fa-eye"></i> EyeSpeak</div>
-<div class="nav-left-links">
-<a href="#features">Features</a>
-<a href="#research">Research</a>
-</div>
-<div class="nav-right">
-<button class="dark-btn" onclick="toggleDark()" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-</div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+
+    <a class="navbar-brand" href="#"> <i class="fa-solid fa-eye"></i> EyeSpeak</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="nav">
+
+      <ul class="navbar-nav me-3">
+        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+      </ul>
+
+      <button class="btn btn-outline-light" onclick="toggleTheme()" id="themeBtn">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+
+    </div>
+  </div>
 </nav>
 
-<section class="hero">
-<div class="logo-stack">
-<div class="logo-float" id="logo3d">
-<img src="ic_background.png" class="logo-bg" alt="EyeSpeak Background Logo">
-<img src="ic_foreground.png" class="logo-main" alt="EyeSpeak Main Logo">
-</div>
-</div>
-<h1>EyeSpeak</h1>
-<p>EyeSpeak is a mobile assistive application designed to help visually impaired pupils read printed text by scanning documents and converting recognized text into spoken audio.</p>
-<a class="download" href="eyespeak.apk" download><i class="fa-solid fa-download"></i> Download APK</a>
+<!-- HERO -->
+<section class="hero" style="margin-top:0;">
+  <div class="container">
+    <img src="ic_foreground.png" alt="logo">
+    <h1 class="display-4 fw-bold">EyeSpeak</h1>
+    <p class="lead">An assistive mobile application that scans printed materials and reads them aloud, helping visually impaired learners access books, worksheets, and notices independently.</p>
+    <a href="eyespeak.apk" download class="btn btn-main btn-lg mt-3">
+      <i class="fa-solid fa-download"></i> Download APK
+    </a>
+  </div>
 </section>
 
-<section id="features" class="features">
-<h2>Key Features</h2>
-<div class="grid">
-<div class="card"><i class="fa-solid fa-camera"></i><h3>OCR Camera</h3><p>Scan printed materials using the smartphone camera.</p></div>
-<div class="card"><i class="fa-solid fa-volume-high"></i><h3>Text to Speech</h3><p>Detected text is converted into spoken audio.</p></div>
-<div class="card"><i class="fa-solid fa-brain"></i><h3>Machine Learning</h3><p>Advanced OCR powered by machine learning.</p></div>
-<div class="card"><i class="fa-solid fa-universal-access"></i><h3>Accessibility</h3><p>Designed for visually impaired pupils.</p></div>
-</div>
-<div id="research" class="research">
-<h2>Research & Thesis Description</h2>
-<p>EyeSpeak is an assistive mobile application developed to improve access to printed learning materials for visually impaired students. The application uses Google ML Kit for OCR and Android Text-to-Speech to read content aloud.</p>
-</div>
+<!-- FEATURES -->
+<section id="features" class="py-5">
+  <div class="container text-center">
+    <h2 class="section-title">Key Features</h2>
+
+    <div class="row g-4 mt-3">
+
+      <div class="col-md-3">
+        <div class="card feature-card p-4">
+          <i class="fa-solid fa-camera icon"></i>
+          <h5>OCR Camera</h5>
+          <p>Scan printed text instantly using your smartphone camera.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card feature-card p-4">
+          <i class="fa-solid fa-volume-high icon"></i>
+          <h5>Text to Speech</h5>
+          <p>Convert detected text into clear spoken audio.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card feature-card p-4">
+          <i class="fa-solid fa-brain icon"></i>
+          <h5>Text Recognition</h5>
+          <p>Detects and converts printed text into readable digital text for audio playback.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card feature-card p-4">
+          <i class="fa-solid fa-universal-access icon"></i>
+          <h5>Accessibility</h5>
+          <p>Designed specifically for visually impaired users.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<footer>EyeSpeak Website © 2026</footer>
+<!-- RESEARCH -->
+<section id="research" class="py-5 bg-body-tertiary">
+  <div class="container">
+    <h2 class="section-title text-center">Research</h2>
+    <div class="research-card" style="text-align:justify;">
+      <p>
+        EyeSpeak is a mobile assistive system designed to help visually impaired pupils access printed learning materials independently. 
+        It captures printed text using the device camera, converts it into readable text, and immediately reads it aloud using text-to-speech.
+        
+        The system supports both English and Tagalog languages, includes replay functionality for saved readings, and provides accessibility features such as zoom, flash support, and voice feedback.
+        
+        It is designed to function fully offline after installation, ensuring consistent usability in classrooms and environments without internet access.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  EyeSpeak © 2026
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-function toggleDark(){document.body.classList.toggle("dark");}
-function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
-const logo=document.getElementById("logo3d");
-document.addEventListener("mousemove",(e)=>{
-if(window.innerWidth<768){logo.style.transform="";return;}
-const x=(window.innerWidth/2-e.pageX)/40;
-const y=(window.innerHeight/2-e.pageY)/40;
-logo.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`;
-});
+  const html = document.documentElement;
+  const btn = document.getElementById("themeBtn");
+
+  const savedTheme = localStorage.getItem("theme");
+  if(savedTheme){
+    html.setAttribute("data-bs-theme", savedTheme);
+    updateIcon(savedTheme);
+  }
+
+  function toggleTheme(){
+    const current = html.getAttribute("data-bs-theme");
+    const newTheme = current === "dark" ? "light" : "dark";
+
+    html.setAttribute("data-bs-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    updateIcon(newTheme);
+  }
+
+  function updateIcon(theme){
+    btn.innerHTML = theme === "dark"
+      ? '<i class="fa-solid fa-sun"></i>'
+      : '<i class="fa-solid fa-moon"></i>';
+  }
 </script>
 
 </body>
